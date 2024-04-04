@@ -9,16 +9,13 @@ async function reqHandler(req: Request) {
 
     // Figure out stuff for cors
     const CORSheaders = new Headers()
-    const origin = req.headers.get("origin") || "https://discord.com"
+    const origin = "https://discord.com"
 
-    let AllowedHeaders = ""
-    for (const header of req.headers.keys()) {
-        AllowedHeaders += header + ", "
-    }
+    const AllowedHeaders = "authorization,content-type"
 
     // Set cors
     CORSheaders.set("access-control-allow-origin", origin)
-    // CORSheaders.set("access-control-allow-headers", AllowedHeaders)
+    CORSheaders.set("access-control-allow-headers", AllowedHeaders)
     CORSheaders.set("access-control-allow-credentials", "true")
     if (req.method.toUpperCase() == "OPTIONS") {
         console.info(`Sent OPTIONS: ${url}`)
@@ -38,7 +35,7 @@ async function reqHandler(req: Request) {
     // Add CORS to headers
     const responseHeaders = new Headers(response.headers)
     responseHeaders.set("access-control-allow-origin", origin)
-    // responseHeaders.set("access-control-allow-headers", AllowedHeaders)
+    responseHeaders.set("access-control-allow-headers", AllowedHeaders)
     responseHeaders.set("access-control-allow-credentials", "true")
 
     // Return
