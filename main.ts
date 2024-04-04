@@ -1,6 +1,3 @@
-// Dependencies
-import { serve } from "https://deno.land/std@0.170.0/http/mod.ts";
-
 // See whenever we get an inbound request
 async function reqHandler(req: Request) {
     // Replace host, checking the subdomain
@@ -47,4 +44,4 @@ async function reqHandler(req: Request) {
 }
 
 // Serve
-serve(reqHandler, {port: 443});
+Deno.serve({ port: 443 }, reqHandler);
